@@ -6,7 +6,7 @@
 </style>
 @stop
 <div class="row">
-<div class="col-lg-12">
+	<div class="col-lg-12">
 		<div class="card card-outline-info">
 			<div class="card-header">
 				<h4 class="m-b-0 text-white">Add New User</h4>
@@ -93,7 +93,7 @@
 									<select class="form-control @error('addressCountry') form-control-danger @enderror" id="addressCountry" placeholder="addressCountry" name="addressCountry" onChange="getCountyLicenseClass(this);">
 										<option value="">Select Driver License Country</option>
 										@foreach($country as $cont)
-											<option value="{{$cont->id}}">{{$cont->name}}</option>
+										<option value="{{$cont->id}}">{{$cont->name}}</option>
 										@endforeach
 									</select>
 								</div>
@@ -111,7 +111,7 @@
 								<div class="form-group @error('driver_license_class') has-danger @enderror">
 									<label>Driver License Country</label>
 									<select multiple class="form-control @error('driver_license_class') form-control-danger @enderror" id="driver_license_class" placeholder="driver_license_class" name="driver_license_class[]">
-									<option value=""> --Select Class-- </option>
+										<option value=""> --Select Class-- </option>
 									</select>
 								</div>
 							</div>
@@ -167,25 +167,25 @@
 @stop
 @section('pagejs')
 <script type="text/javascript">
-	function getCountyLicenseClass(obj){
+	function getCountyLicenseClass(obj) {
 		let countryId = $(obj).val();
 		$.ajax({
-			url:'{{ url("/request/get-country-license-class") }}'+'/'+countryId,
+			url: '{{ url("/request/get-country-license-class") }}' + '/' + countryId,
 			type: 'GET',
-			success:function(rtnData){
-				 console.log(rtnData);
-				 if(rtnData.status == 'success'){
-					 var classList	=	rtnData.list;
-					 let options = "<option value=''> --Select Options-- </option>";
-					 $.each(classList,function(key, value){
-						 options +='<option value=' + value.id + '>' + value.license_class + '</option>';
+			success: function(rtnData) {
+				console.log(rtnData);
+				if (rtnData.status == 'success') {
+					var classList = rtnData.list;
+					let options = "<option value=''> --Select Options-- </option>";
+					$.each(classList, function(key, value) {
+						options += '<option value=' + value.id + '>' + value.license_class + '</option>';
 					});
 					$('#driver_license_class').html(options);
-					}else{
-						console.log(rtnData.msg);
-					}
+				} else {
+					console.log(rtnData.msg);
 				}
-		}); 
+			}
+		});
 	}
 </script>
 @stop
