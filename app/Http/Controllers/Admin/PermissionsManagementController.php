@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller; 
 use App\Models\Permission;
 use App\Models\PermissionRoleRelation;
 use App\Models\Role;
